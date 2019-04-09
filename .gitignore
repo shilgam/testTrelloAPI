@@ -1,0 +1,4 @@
+# project specific
+/testTrello-data/
+/.pytest_cache/
+__pycache__/
