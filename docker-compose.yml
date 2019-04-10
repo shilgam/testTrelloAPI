@@ -1,10 +1,8 @@
 version: '3.4'
 services:
-  testTrello:
-    # repo https://github.com/grihabor/pytest.images
-    image: grihabor/pytest:python3.7-alpine
-    working_dir: /usr/src/
+  app:
+    build: .
     volumes:
       - $PWD:/usr/src/
-      - $PWD/testTrello-data:/root/
+      - $PWD/app-data:/root/
     command: pytest .
