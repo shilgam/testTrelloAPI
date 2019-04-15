@@ -1,0 +1,6 @@
+{
+    "request_token_url":"https://trello.com/1/OAuthGetRequestToken",
+    "access_token_url": "https://trello.com/1/OAuthGetAccessToken",
+    "authorize_url": "https://trello.com/1/OAuthAuthorizeToken",
+    "base_url": "https://api.trello.com"
+}
