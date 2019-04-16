@@ -5,4 +5,10 @@ services:
     volumes:
       - $PWD:/usr/src/
       - $PWD/app-data:/root/
+    environment:
+      - API_KEY
+      - API_SECRET
+      - REQUEST_TOKEN
+      - REQUEST_TOKEN_SECRET
+      - OAUTH_VERIFIER
     command: pytest .
