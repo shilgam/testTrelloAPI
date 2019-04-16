@@ -1,38 +1,15 @@
-from environs import Env
-from rauth import OAuth1Service
+from lib.auth_helper import get_auth_session, setup_service_wrapper
+from lib.test_helper import get_secrets, get_configs
 import json
 
+env = get_secrets()
 
-env = Env()
-env.read_env()  # read .env file, if it exists
+trello = setup_service_wrapper(
+    env("API_KEY"),
+    env("API_SECRET"),
+    get_configs())
 
-
-configs_filename = 'app_configs.json'
-f = open(configs_filename)
-configs = json.loads(f.read())
-
-
-trello = OAuth1Service(
-    name='testTrelloAPI',
-    consumer_key=env("API_KEY"),
-    consumer_secret=env("API_SECRET"),
-    request_token_url=configs["request_token_url"],
-    access_token_url=configs["access_token_url"],
-    authorize_url=configs["authorize_url"],
-    base_url=configs["base_url"])
-
-
-request_token = env("REQUEST_TOKEN")
-request_token_secret = env("REQUEST_TOKEN_SECRET")
-pin = env("PIN")
-
-
-# Exchange the authorized request token for an authenticated OAuth1Session:
-session = trello.get_auth_session(
-    request_token,
-    request_token_secret,
-    method='POST',
-    data={'oauth_verifier': pin})
+session = get_auth_session(trello, env("OAUTH_VERIFIER"))
 
 
 def test_board_name():

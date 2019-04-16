@@ -18,18 +18,10 @@ Docker and docker-compose installed
 
         $ docker-compose build
 
-1. Get remaining secrets (`request_token`, `request_token_secret`, `pin`) by running script and by following instructions:
+1. Get remaining secrets by running script below:
 
-        $ docker-compose run --rm app sh
-        $ python lib/get_trello_creds.py
-
-1. Add your received secrets into the `.env` file. So that after that `.env` file will look like this:
-
-        API_KEY={your api key here}
-        API_SECRET={your api secret here}
-        REQUEST_TOKEN={your request_token here}
-        REQUEST_TOKEN_SECRET={your request_token_secret here}
-        PIN={your pin here}
+        $ docker-compose run --rm app python test/lib/get_trello_creds.py
+     and by follow instructions.
 
 1. Run the test suite:
 

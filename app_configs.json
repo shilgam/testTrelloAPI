@@ -1,4 +1,5 @@
 {
+    "trello_service_name": "testTrelloAPI",
     "request_token_url":"https://trello.com/1/OAuthGetRequestToken",
     "access_token_url": "https://trello.com/1/OAuthGetAccessToken",
     "authorize_url": "https://trello.com/1/OAuthAuthorizeToken",
