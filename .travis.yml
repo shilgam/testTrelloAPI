@@ -1,0 +1,19 @@
+sudo: required
+services:
+  - docker/compose:1.23.1
+
+jobs:
+  include:
+    - name: test
+      script: |
+        # build docker image
+        docker-compose build
+        docker image ls
+
+        # run tests
+        API_KEY=$API_KEY \
+          API_SECRET=$API_SECRET \
+          REQUEST_TOKEN=$REQUEST_TOKEN \
+          REQUEST_TOKEN_SECRET=$REQUEST_TOKEN_SECRET \
+          OAUTH_VERIFIER=$OAUTH_VERIFIER \
+          docker-compose run --rm app pytest
