@@ -1,5 +1,5 @@
-from lib.auth_helper import get_auth_session, setup_service_wrapper
-from lib.test_helper import get_secrets, get_configs
+from trello.lib.auth_helper import get_auth_session, setup_service_wrapper
+from trello.lib.test_helper import get_secrets, get_configs
 import json
 
 env = get_secrets()

@@ -15,6 +15,6 @@ def get_configs():
     '''
     Get configs from json file
     '''
-    configs_filename = 'app_configs.json'
+    configs_filename = 'trello/app_configs.json'
     f = open(configs_filename)
     return json.loads(f.read())
