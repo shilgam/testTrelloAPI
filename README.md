@@ -2,6 +2,8 @@
 
 Simple test framework for testing CRUD operations of RESTful API.
 
+[![Build Status](https://travis-ci.com/shilgam/testTrelloAPI.svg?branch=master)](https://travis-ci.com/shilgam/testTrelloAPI)
+
 ## Prerequisites
 
 Docker and docker-compose installed
@@ -20,7 +22,8 @@ Docker and docker-compose installed
 
 1. Get remaining secrets by running script below:
 
-        $ docker-compose run --rm app python test/lib/get_trello_creds.py
+        $ docker-compose run --rm app python trello/lib/get_trello_creds.py
+
      and by follow instructions.
 
 1. Run the test suite:
