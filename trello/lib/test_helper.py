@@ -17,4 +17,16 @@ def get_configs():
     '''
     configs_filename = 'trello/app_configs.json'
     f = open(configs_filename)
-    return json.loads(f.read())
+    content = f.read()
+    f.close()
+    return json.loads(content)
+
+
+def write_file(full_filename, text):
+    '''
+    Create/Update file with the text
+    '''
+    f = open(full_filename, 'w')
+    f.write(text)
+    f.close()
+    print(f'\n>>> File "{full_filename}" was successfully updated')

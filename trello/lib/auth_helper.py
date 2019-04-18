@@ -49,14 +49,17 @@ def generate_access_tokens(session, consumer_key, consumer_secret):
     '''
     oauth_verifier = get_oauth_verifier(session)
 
-    print("\n  >>>>>>>> Here is the new set of access tokens: <<<<<<<<<")
-    print("API_KEY=", consumer_key, sep="")
-    print("API_SECRET=", consumer_secret, sep="")
+    secrets = []
+    secrets.append(f'API_KEY={consumer_key}')
+    secrets.append(f'API_SECRET={consumer_secret}')
     request_token, request_token_secret = session.get_request_token()
-    print("REQUEST_TOKEN=", request_token, sep="")
-    print("REQUEST_TOKEN_SECRET=", request_token_secret, sep="")
-    print("OAUTH_VERIFIER=", oauth_verifier, sep="")
-    print("\nSTEP 3. Copy-paste access tokens above into your '.env' file or pass them as env variables separately")
+    secrets.append(f'REQUEST_TOKEN={request_token}')
+    secrets.append(f'REQUEST_TOKEN_SECRET={request_token_secret}')
+    secrets.append(f'OAUTH_VERIFIER={oauth_verifier}')
+
+    print("\n  >>>>>>>> Here is the new set of access tokens: <<<<<<<<<")
+    print("\n".join(secrets))
+    return secrets
 
 
 def get_auth_session(session, oauth_verifier):

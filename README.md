@@ -24,7 +24,7 @@ Docker and docker-compose installed
 
         $ docker-compose run --rm app python trello/lib/get_trello_creds.py
 
-     and by follow instructions.
+     and follow instructions.
 
 1. Run the test suite:
 

@@ -1,5 +1,5 @@
 from auth_helper import setup_service_wrapper, generate_access_tokens
-from test_helper import get_secrets, get_configs
+from test_helper import get_secrets, get_configs, write_file
 
 
 env = get_secrets()
@@ -8,4 +8,7 @@ api_secret = env("API_SECRET")
 
 trello = setup_service_wrapper(api_key, api_secret, get_configs())
 
-generate_access_tokens(trello, api_key, api_secret)
+secrets = generate_access_tokens(trello, api_key, api_secret)
+
+# update '.env' file with new secrets
+write_file('.env', "\n".join(secrets))
