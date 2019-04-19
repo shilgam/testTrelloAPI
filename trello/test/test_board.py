@@ -3,19 +3,19 @@ from trello.test.helpers.comm_steps import get_first_board
 
 class TestBoard:
 
-    def test_boards(self, trello_session):
+    def test_boards(self, api):
         '''
         GET /boards/
         '''
-        response = trello_session.get('/1/members/me/boards')
+        response = api.get('/1/members/me/boards')
         assert response.json()[0]["name"] == "Untitled board"
 
-    def test_get_boards_by_id(self, trello_session):
+    def test_get_boards_by_id(self, api):
         '''
         GET /boards/{id}
         '''
-        board = get_first_board(trello_session)
-        response = trello_session.get(f'/1/boards/{board["id"]}')
+        board = get_first_board(api)
+        response = api.get(f'/1/boards/{board["id"]}')
         # print(">>>>>>>>> JSON output: ")
         # print("json: ", response.json())
         # print(">>>>>>>>> Prettifield output: ")

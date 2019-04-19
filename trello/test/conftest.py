@@ -4,7 +4,7 @@ import pytest
 
 
 @pytest.fixture(scope="session")
-def trello_session(request):
+def api(request):
     '''
     Create one Trello API session per test session.
     '''
