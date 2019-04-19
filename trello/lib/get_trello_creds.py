@@ -1,5 +1,5 @@
-from auth_helper import setup_service_wrapper, generate_access_tokens
-from test_helper import get_secrets, get_configs, write_file
+from helpers.auth import setup_service_wrapper, generate_access_tokens
+from helpers.steps import get_secrets, get_configs, write_file
 
 
 env = get_secrets()
