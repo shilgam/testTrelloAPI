@@ -1,22 +1,23 @@
-from trello.lib.auth_helper import get_auth_session, setup_service_wrapper
-from trello.lib.test_helper import get_secrets, get_configs
-import json
-
-env = get_secrets()
-
-trello = setup_service_wrapper(
-    env("API_KEY"),
-    env("API_SECRET"),
-    get_configs())
-
-session = get_auth_session(trello, env("OAUTH_VERIFIER"))
+from trello.test.helpers.comm_steps import get_first_board
 
 
-def test_board_name():
-    r = session.get('/1/members/me/boards')
-    print(">>>>>>>>> JSON output: ")
-    print("json: ", r.json())
+class TestBoard:
 
-    print(">>>>>>>>> Prettifield output: ")
-    print(json.dumps(r.json(), indent=4))
-    assert r.json()[0]["name"] == "Untitled board"
+    def test_boards(self, trello_session):
+        '''
+        GET /boards/
+        '''
+        response = trello_session.get('/1/members/me/boards')
+        assert response.json()[0]["name"] == "Untitled board"
+
+    def test_get_boards_by_id(self, trello_session):
+        '''
+        GET /boards/{id}
+        '''
+        board = get_first_board(trello_session)
+        response = trello_session.get(f'/1/boards/{board["id"]}')
+        # print(">>>>>>>>> JSON output: ")
+        # print("json: ", response.json())
+        # print(">>>>>>>>> Prettifield output: ")
+        # print(json.dumps(response.json(), indent=4))
+        assert response.json()["name"] == "Untitled board"
