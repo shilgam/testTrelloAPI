@@ -1,23 +1,48 @@
+from trello.lib.helpers.data import get_subset_dict
 from trello.test.helpers.comm_steps import get_first_board
+# import json
+import requests
 
 
-class TestBoard:
+class TestGetBoardById:
+    '''
+    GET /boards/{id}
+    Request a single board.
+    '''
 
-    def test_boards(self, api):
+    def test_status_code(self, api):
+        board = get_first_board(api)
+        response = api.get(f'/1/boards/{board["id"]}')
+        assert response.status_code == requests.codes['ok']
+
+    def test_fetches_requested_data(self, api):
         '''
-        GET /boards/
-        '''
-        response = api.get('/1/members/me/boards')
-        assert response.json()[0]["name"] == "Untitled board"
-
-    def test_get_boards_by_id(self, api):
-        '''
-        GET /boards/{id}
+        Board attributes should has correct values.
         '''
         board = get_first_board(api)
         response = api.get(f'/1/boards/{board["id"]}')
-        # print(">>>>>>>>> JSON output: ")
-        # print("json: ", response.json())
         # print(">>>>>>>>> Prettifield output: ")
         # print(json.dumps(response.json(), indent=4))
-        assert response.json()["name"] == "Untitled board"
+        attrs = {
+            'id',
+            'name',
+            'shortUrl',
+            'url',
+        }
+        short_board = get_subset_dict(board, attrs)
+        short_resp = get_subset_dict(response.json(), attrs)
+        assert short_board == short_resp
+
+
+class TestGetBoardCardsIndex:
+    '''
+    GET /boards/{id}/cards
+    '''
+
+    def test_get_cards(self, api):
+        '''
+        GET /boards/{id}/cards
+        '''
+        board = get_first_board(api)
+        response = api.get(f'/1/boards/{board["id"]}/cards')
+        assert response.json()[0]["name"] == "Untitled card"
