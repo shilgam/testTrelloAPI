@@ -33,3 +33,12 @@ Docker and docker-compose installed
 1. Clean up containers after tests:
 
         $ docker-compose down
+
+
+### Notes
+
+* Test suite logs recorded to a `pytest.log` file
+
+### Additional info
+
+* Trello API docs: https://developers.trello.com/reference
