@@ -28,7 +28,7 @@ def get_authorize_url(session):
     Returns a formatted authorize URL.
     '''
     request_token = get_request_token(session)[0]
-    params = {'expiration': 'never'}
+    params = {'expiration': 'never', 'scope': 'read,write'}
     authorize_url = session.get_authorize_url(request_token, **params)
     return authorize_url
 
@@ -38,7 +38,7 @@ def get_oauth_verifier(session):
     Go through the authentication flow. Trello will give you a PIN to enter.
     '''
     authorize_url = get_authorize_url(session)
-    print('STEP 1. Visit this URL in your browser: {url}'.format(url=authorize_url))
+    print('STEP 1. Visit this URL in your browser:\n{url}'.format(url=authorize_url))
     pin = input('STEP 2. Enter PIN from browser: ')
     return pin
 
