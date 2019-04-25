@@ -2,7 +2,6 @@ board_only_req_fields = {
     "name": "required fields only",
 }
 
-
 board_optional_fields = {
     # "closed": True,
     "desc": "Some description for the board",
